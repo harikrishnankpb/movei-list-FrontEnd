@@ -31,8 +31,11 @@ export default {
                 alert('Success');
             }
             else alert('Something went wrong');
-            localStorage.setItem('token', JSON.stringify(data.msg))
         }
+    },
+    mounted() {
+        let token = localStorage.getItem('token');
+        if (token) this.$router.push({ name: 'Home' })
     }
 }
 </script>

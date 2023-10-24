@@ -25,8 +25,25 @@ export default {
             });
             // console.log(result)
             let { data } = result
-            console.log(data);
+            if (data.status) {
+                alert(data.msg);
+                if (data.token) {
+                    localStorage.setItem('token', JSON.stringify(data.token));
+                    let exp = 60 * 60 * 12 * 1000;
+                    this.$cookies.set('accessToken', data.token, {
+                        sameSite:
+                            'none', secure:
+                            true, maxAge: exp * 1000,
+                        // httpOnly: true
+                    });
+                }
+            }
+            else alert(data.msg)
         }
+    },
+    mounted() {
+        let token = localStorage.getItem('token');
+        if (token) this.$router.push({ name: 'Home' })
     }
 }
 </script>
