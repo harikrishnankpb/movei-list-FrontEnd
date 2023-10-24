@@ -26,8 +26,12 @@ export default {
                 password: this.password
             })
             let data = result.data
-            if (data.status == true) alert('Sucess');
-            else alert('Something went wrong')
+            if (data.status == true) {
+                this.$router.push({ name: 'LogIn' });
+                alert('Success');
+            }
+            else alert('Something went wrong');
+            localStorage.setItem('token', JSON.stringify(data.msg))
         }
     }
 }
