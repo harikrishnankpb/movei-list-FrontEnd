@@ -2,7 +2,7 @@
     <div class="signup-form">
         <input type="text" class="input-field" placeholder="Enter email" v-model="email" />
         <input type="password" class="input-field" placeholder="Enter password" v-model="password" />
-        <button class="signup-button" v-on:click="signUp">Sign Up</button>
+        <button class="signup-button" v-on:click="signIn">Log In</button>
     </div>
 </template>
 
@@ -20,9 +20,12 @@ export default {
     methods: {
         async signIn() {
             let result = await axios.post("http://localhost:8000/api/users/signIn", {
-                emil: this.email,
+                email: this.email,
                 password: this.password
-            })
+            });
+            // console.log(result)
+            let { data } = result
+            console.log(data);
         }
     }
 }
