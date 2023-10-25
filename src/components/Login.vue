@@ -36,6 +36,7 @@ export default {
                             true, maxAge: exp * 1000,
                         // httpOnly: true
                     });
+                    this.$router.push({ name: 'Home' })
                 }
             }
             else alert(data.msg)
