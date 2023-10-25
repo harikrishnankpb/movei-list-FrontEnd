@@ -26,6 +26,8 @@ export default {
         }
     },
     mounted() {
+        let token = localStorage.getItem('token');
+        if (!token) this.$router.push({ name: 'LogIn' });
         const id = this.$route.params.id;
         this.id = id
         if (id) localStorage.setItem('updateMovieId', id)

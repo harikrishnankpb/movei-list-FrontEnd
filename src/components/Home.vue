@@ -62,6 +62,8 @@ export default {
         orderBy: 'getMovies'
     },
     mounted() {
+        let token = localStorage.getItem('token');
+        if (!token) this.$router.push({ name: 'LogIn' });
         this.getMovies()
     }
 }

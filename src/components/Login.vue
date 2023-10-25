@@ -26,7 +26,6 @@ export default {
             // console.log(result)
             let { data } = result
             if (data.status) {
-                alert(data.msg);
                 if (data.token) {
                     localStorage.setItem('token', JSON.stringify(data.token));
                     let exp = 60 * 60 * 12 * 1000;
