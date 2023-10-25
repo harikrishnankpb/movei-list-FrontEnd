@@ -32,6 +32,29 @@ export default {
             let formattedDate = new Date(dateFromDb);
             formattedDate = format(formattedDate, 'MMMM d, y');
             return formattedDate;
+        },
+        createMovie() {
+            this.$router.push({ name: 'CreateMovie' });
+        },
+        async deleteMovie(id) {
+            if (window.confirm("Are you sure you want to delete this movie?")) {
+                let result = await axios.post("http://localhost:8000/api/movies/deleteMovie", {
+                    id
+                },
+                    {
+                        withCredentials: true
+                    }
+                );
+                let { data } = result;
+                if (data.status) {
+                    alert('Success');
+                    this.getMovies()
+                } else alert('Something went wrong');
+            }
+        },
+        updateMovie(id) {
+            console.log('id', id)
+            this.$router.push({ name: 'UpdateMovie', params: { id } })
         }
     },
     watch: {
@@ -51,7 +74,7 @@ export default {
         </div>
 
         <div class="search-create-row">
-            <button class="create-movie-btn">Create Movie</button>
+            <button class="create-movie-btn" @click="createMovie">Create Movie</button>
             <input type="text" placeholder="Search" class="search-input" v-model="searchText" />
             <select class="sort-dropdown" v-model="orderBy">
                 <option value="createdAt">Created</option>
@@ -75,8 +98,8 @@ export default {
                     </p>
                 </div>
                 <div class="edit-delete-buttons">
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button @click="updateMovie(movie.id)">Edit</button>
+                    <button @click="deleteMovie(movie.id)">Delete</button>
                 </div>
             </div>
             <!-- Repeat for other movie cards -->
