@@ -3,6 +3,8 @@
         <input type="text" class="input-field" placeholder="Enter email" v-model="email" />
         <input type="password" class="input-field" placeholder="Enter password" v-model="password" />
         <button class="signup-button" v-on:click="signIn">Log In</button>
+        <br>
+        <button class="register-button" v-on:click="goSignUp">New User</button>
     </div>
 </template>
 
@@ -18,6 +20,9 @@ export default {
         }
     },
     methods: {
+        goSignUp() {
+            this.$router.push('SignUp')
+        },
         async signIn() {
             let result = await axios.post("http://localhost:8000/api/users/signIn", {
                 email: this.email,
@@ -68,6 +73,22 @@ export default {
     width: 100%;
     padding: 10px;
     background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    /* Center the button as a block-level element */
+    margin: 0 auto;
+    margin-left: 12px;
+    /* Center horizontally */
+}
+
+.register-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4400;
     color: #fff;
     border: none;
     border-radius: 5px;
